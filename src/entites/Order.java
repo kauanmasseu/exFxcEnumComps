@@ -14,7 +14,6 @@ public class Order {
     private Client client;
     private List<OrderItem> item = new ArrayList<>();
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat sdfh = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Order() {
@@ -55,5 +54,25 @@ public class Order {
             sum += o.subTotal();
         }
         return sum;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order moment: ");
+        sb.append(sdfh.format(moment) + "\n");
+        sb.append("Order status: ");
+        sb.append(status + "\n");
+        sb.append("Client: ");
+        sb.append(client + "\n");
+        sb.append("Order items: \n");
+        for (OrderItem o : item) {
+            sb.append(o.getProduct() + ", ");
+            sb.append(o + "\n");
+        }
+        sb.append("Total price: $");
+        sb.append(String.format("%.2f", total()));
+
+        return sb.toString();
     }
 }

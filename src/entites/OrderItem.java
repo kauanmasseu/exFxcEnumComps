@@ -30,4 +30,9 @@ public class OrderItem {
     public Double subTotal() {
         return price * quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Quantity: " + quantity + ", Subtotal: $" + String.format("%.2f", subTotal());
+    }
 }

@@ -1,7 +1,9 @@
-package Application;
+package application;
 
 import entites.Client;
 import entites.Order;
+import entites.OrderItem;
+import entites.Product;
 import entities.enums.OrderStatus;
 
 import java.text.ParseException;
@@ -27,21 +29,30 @@ public class Program {
         Client client = new Client(name, email, birthDate);
 
         System.out.println("Enter order data:");
+        System.out.print("Status: ");
         OrderStatus orderStatus = OrderStatus.valueOf(sc.next());
         Order order = new Order(orderStatus, client);
 
         System.out.print("How many items to this order? ");
         int n = sc.nextInt();
         for(int i = 0; i < n; i++) {
-            System.out.print("Enter #" + (1+i) + " item data:");
-            System.out.print("Enter #\" + (1+i) + \" item data:");
+            sc.nextLine();
+            System.out.println("Enter #" + (1+i) + " item data:");
+            System.out.print("Product name: ");
+            String productName = sc.nextLine();
+            System.out.print("Product price: ");
+            double productPrice = sc.nextDouble();
+            System.out.print("Quantity: ");
+            int quantity = sc.nextInt();
+
+            Product product = new Product(productName, productPrice);
+            OrderItem orderItem = new OrderItem(quantity, product.getPrice(), product);
+            order.addItem(orderItem);
         }
+        System.out.println();
 
-
-
-
-
-
+        System.out.println("ORDER SUMMARY:");
+        System.out.println(order);
 
         sc.close();
     }
